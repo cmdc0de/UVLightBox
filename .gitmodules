@@ -1,0 +1,3 @@
+[submodule "firmware/lightbox/components/libesp"]
+	path = firmware/lightbox/components/libesp
+	url = https://github.com/cmdc0de/libesp
