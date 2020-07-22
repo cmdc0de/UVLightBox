@@ -1,2 +1,11 @@
-idf_component_register(SRCS "hello_world_main.c"
-                    INCLUDE_DIRS "")
+set(srcs "./app.cpp"
+	"./menus/calibration_menu.cpp"
+	"./menus/menu_state.cpp"
+	"./menus/appbase_menu.cpp"
+	"./menus/gui_list_processor.cpp"
+	"./lightbox.cpp"
+)
+
+idf_component_register(SRCS "${srcs}"
+		INCLUDE_DIRS ""
+		)
