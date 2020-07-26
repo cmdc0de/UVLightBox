@@ -48,8 +48,8 @@ public:
 	static const char *sNO;
 	static const uint16_t DISPLAY_HEIGHT		= 240;
 	static const uint16_t DISPLAY_WIDTH			= 320;
-	//static const uint16_t FRAME_BUFFER_HEIGHT	= 132;
-	//static const uint16_t FRAME_BUFFER_WIDTH	= 176;
+	//static const uint16_t FRAME_BUFFER_HEIGHT	= DISPLAY_HEIGHT;
+	//static const uint16_t FRAME_BUFFER_WIDTH	= DISPLAY_WIDTH;
 	static const uint16_t FRAME_BUFFER_HEIGHT	= 138;
 	static const uint16_t FRAME_BUFFER_WIDTH	= 184;
 	static MyApp &get();
