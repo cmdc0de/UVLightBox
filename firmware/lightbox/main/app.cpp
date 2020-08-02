@@ -37,7 +37,7 @@ const char *MyApp::sNO = "No";
 
 
 #define START_ROT libesp::DisplayILI9341::LANDSCAPE_TOP_LEFT
-static const uint16_t PARALLEL_LINES = 10;
+static const uint16_t PARALLEL_LINES = 1;
 
 libesp::DisplayILI9341 Display(MyApp::DISPLAY_WIDTH,MyApp::DISPLAY_HEIGHT,START_ROT,
 	PIN_NUM_DISPLAY_BACKLIGHT, PIN_NUM_DISPLAY_RESET);
@@ -127,12 +127,19 @@ libesp::ErrorType MyApp::onInit() {
 	et=Display.init(libesp::DisplayILI9341::FORMAT_16_BIT, &Font_6x10, &FrameBuf);
 	if(et.ok()) {
 		ESP_LOGI(LOGTAG,"display init OK");
-		Display.fillRec(0,0,FRAME_BUFFER_WIDTH,10,libesp::RGBColor::RED);
+		Display.fillScreen(libesp::RGBColor::BLACK);
 		Display.swap();
+		vTaskDelay(1000 / portTICK_RATE_MS);
+		Display.fillRec(0,0,FRAME_BUFFER_WIDTH/2,10,libesp::RGBColor::RED);
+		Display.fillRec(0,10,FRAME_BUFFER_WIDTH,10,libesp::RGBColor::RED);
+		Display.swap();
+		vTaskDelay(1000 / portTICK_RATE_MS);
 		Display.fillRec(0,20,FRAME_BUFFER_WIDTH,10,libesp::RGBColor::WHITE);
 		Display.swap();
+		vTaskDelay(1000 / portTICK_RATE_MS);
 		Display.fillRec(0,40,FRAME_BUFFER_WIDTH,10,libesp::RGBColor::BLUE);
 		Display.swap();
+		vTaskDelay(1000 / portTICK_RATE_MS);
 		Display.fillRec(0,60,FRAME_BUFFER_WIDTH,10,libesp::RGBColor::GREEN);
 		Display.drawRec(0,75,100,10, libesp::RGBColor::BLUE);
 		Display.drawString(30,100,"HELLO Defcon 27!",libesp::RGBColor::RED);
@@ -177,7 +184,7 @@ libesp::GUI &MyApp::getGUI() {
 }
 
 ErrorType MyApp::onRun() {
-#if 0 
+#if 1 
 		  return ErrorType();
 #else
 	TouchTask.broadcast();

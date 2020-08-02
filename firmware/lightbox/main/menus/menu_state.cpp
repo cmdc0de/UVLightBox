@@ -19,6 +19,9 @@ static const char *LOGTAG = "MenuState";
 MenuState::MenuState() :
 	AppBaseMenu(), MenuList("Main Menu", Items, 0, 0, 
 	MyApp::get().getLastCanvasWidthPixel(), MyApp::get().getLastCanvasHeightPixel(), 0, ItemCount) {
+
+	ESP_LOGI(LOGTAG,"menulist: %d %d",MyApp::get().getLastCanvasWidthPixel(),
+						 MyApp::get().getLastCanvasHeightPixel());
 	
 	InternalQueueHandler = xQueueCreateStatic(QUEUE_SIZE,MSG_SIZE,&InternalQueueBuffer[0],&InternalQueue);
 }
