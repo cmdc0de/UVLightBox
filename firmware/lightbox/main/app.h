@@ -49,10 +49,11 @@ public:
 	static const char *sNO;
 	static const uint16_t DISPLAY_HEIGHT		= 240;
 	static const uint16_t DISPLAY_WIDTH			= 320;
-	static const uint16_t FRAME_BUFFER_HEIGHT	= DISPLAY_HEIGHT;
-	static const uint16_t FRAME_BUFFER_WIDTH	= DISPLAY_WIDTH;
-	//static const uint16_t FRAME_BUFFER_HEIGHT	= 138;
-	//static const uint16_t FRAME_BUFFER_WIDTH	= 184;
+	//static const uint16_t FRAME_BUFFER_HEIGHT	= DISPLAY_HEIGHT;
+	//static const uint16_t FRAME_BUFFER_WIDTH	= DISPLAY_WIDTH;
+	//reminder ESP32 has 160KiB static and DRAM So a 1:1 buffer doesn't fit.
+	static const uint16_t FRAME_BUFFER_HEIGHT	= 144;
+	static const uint16_t FRAME_BUFFER_WIDTH	= 192;
 	//static const uint16_t FRAME_BUFFER_HEIGHT	= 168;
 	//static const uint16_t FRAME_BUFFER_WIDTH	= 224;
 	static MyApp &get();

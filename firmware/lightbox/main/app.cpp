@@ -130,21 +130,19 @@ libesp::ErrorType MyApp::onInit() {
 		ESP_LOGI(LOGTAG,"display init OK");
 		Display.fillScreen(libesp::RGBColor::BLACK);
 		Display.swap();
-		vTaskDelay(1000 / portTICK_RATE_MS);
-		Display.fillRec(0,0,FRAME_BUFFER_WIDTH/2,10,libesp::RGBColor::RED);
-		Display.fillRec(0,10,FRAME_BUFFER_WIDTH,10,libesp::RGBColor::RED);
+		ESP_LOGI(LOGTAG,"fill black done");
+		Display.fillRec(0,0,FRAME_BUFFER_WIDTH/4,10,libesp::RGBColor::RED);
+		Display.swap();
+		vTaskDelay(500 / portTICK_RATE_MS);
+		Display.fillRec(0,15,FRAME_BUFFER_WIDTH/2,10,libesp::RGBColor::WHITE);
 		Display.swap();
 		vTaskDelay(1000 / portTICK_RATE_MS);
-		Display.fillRec(0,20,FRAME_BUFFER_WIDTH,10,libesp::RGBColor::WHITE);
+		Display.fillRec(0,30,FRAME_BUFFER_WIDTH,10,libesp::RGBColor::BLUE);
 		Display.swap();
 		vTaskDelay(1000 / portTICK_RATE_MS);
-		Display.fillRec(0,40,FRAME_BUFFER_WIDTH,10,libesp::RGBColor::BLUE);
-		Display.swap();
-		vTaskDelay(1000 / portTICK_RATE_MS);
-		Display.fillRec(0,60,FRAME_BUFFER_WIDTH,10,libesp::RGBColor::GREEN);
-		Display.drawRec(0,75,100,10, libesp::RGBColor::BLUE);
-		Display.drawString(30,100,"HELLO Defcon 27!",libesp::RGBColor::RED);
-		Display.drawString(10,110,"Welcome To DarkNet 8!",libesp::RGBColor::BLUE, libesp::RGBColor::WHITE,1,false);
+		Display.drawRec(0,60,FRAME_BUFFER_WIDTH/2,20, libesp::RGBColor::GREEN);
+		Display.drawString(15,110,"Color Validation.",libesp::RGBColor::RED);
+		Display.drawString(30,120,"UVLight Box",libesp::RGBColor::BLUE, libesp::RGBColor::WHITE,1,false);
 		Display.swap();
 
 		vTaskDelay(1000 / portTICK_RATE_MS);
@@ -185,7 +183,7 @@ libesp::GUI &MyApp::getGUI() {
 }
 
 ErrorType MyApp::onRun() {
-#if 1 
+#if 0
 		  return ErrorType();
 #else
 	TouchTask.broadcast();
