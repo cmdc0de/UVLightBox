@@ -42,8 +42,9 @@ static const uint16_t PARALLEL_LINES = 1;
 libesp::DisplayILI9341 Display(MyApp::DISPLAY_WIDTH,MyApp::DISPLAY_HEIGHT,START_ROT,
 	PIN_NUM_DISPLAY_BACKLIGHT, PIN_NUM_DISPLAY_RESET);
 
-//static uint16_t BkBuffer[MyApp::FRAME_BUFFER_WIDTH*MyApp::FRAME_BUFFER_HEIGHT];
-static uint16_t *BackBuffer = new uint16_t[MyApp::FRAME_BUFFER_WIDTH*MyApp::FRAME_BUFFER_HEIGHT];
+static uint16_t BkBuffer[MyApp::FRAME_BUFFER_WIDTH*MyApp::FRAME_BUFFER_HEIGHT];
+static uint16_t *BackBuffer = &BkBuffer[0];
+//static uint16_t *BackBuffer = new uint16_t[MyApp::FRAME_BUFFER_WIDTH*MyApp::FRAME_BUFFER_HEIGHT];
 
 uint16_t ParallelLinesBuffer[MyApp::DISPLAY_WIDTH*PARALLEL_LINES] = {0};
 
@@ -72,7 +73,7 @@ uint32_t MyApp::getBackBufferSize() {
 }
 
 
-MyApp::MyApp() : AppErrors() {
+MyApp::MyApp() : MyNvsHandle(0), AppErrors()  {
 	ErrorType::setAppDetail(&AppErrors);
 }
 
