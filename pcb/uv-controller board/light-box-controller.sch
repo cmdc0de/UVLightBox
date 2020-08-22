@@ -5722,6 +5722,7 @@ Touch: YES&lt;br&gt;</description>
 <part name="D1" library="passives" deviceset="DIODE-SCHOTTKY" device="DIOAD-TH"/>
 <part name="C13" library="passives" deviceset="C-US" device="C0805K" package3d_urn="urn:adsk.eagle:package:8089589/1" value="0.1 uF"/>
 <part name="J3" library="connector" deviceset="M09" device="LONGPADS"/>
+<part name="R5" library="passives" deviceset="RESISTOR" device="0805-RES" value="10 K"/>
 </parts>
 <sheets>
 <sheet>
@@ -5779,6 +5780,10 @@ Touch: YES&lt;br&gt;</description>
 <instance part="C13" gate="G$1" x="93.98" y="40.64" smashed="yes">
 <attribute name="NAME" x="94.996" y="41.275" size="1.778" layer="95"/>
 <attribute name="VALUE" x="94.996" y="36.449" size="1.778" layer="96"/>
+</instance>
+<instance part="R5" gate="G$1" x="149.86" y="81.28" smashed="yes" rot="R90">
+<attribute name="NAME" x="148.3614" y="77.47" size="1.778" layer="95" rot="R90"/>
+<attribute name="VALUE" x="153.162" y="77.47" size="1.778" layer="96" rot="R90"/>
 </instance>
 </instances>
 <busses>
@@ -5902,12 +5907,19 @@ Touch: YES&lt;br&gt;</description>
 <junction x="157.48" y="66.04"/>
 <label x="149.86" y="66.04" size="1.778" layer="95"/>
 </segment>
+<segment>
+<pinref part="R5" gate="G$1" pin="2"/>
+<wire x1="149.86" y1="86.36" x2="149.86" y2="88.9" width="0.1524" layer="91"/>
+<label x="147.32" y="88.9" size="1.778" layer="95"/>
+</segment>
 </net>
 <net name="UVLED_CONTROL" class="0">
 <segment>
 <pinref part="Q1" gate="G$1" pin="G"/>
-<wire x1="157.48" y1="73.66" x2="152.4" y2="73.66" width="0.1524" layer="91"/>
+<wire x1="157.48" y1="73.66" x2="149.86" y2="73.66" width="0.1524" layer="91"/>
 <label x="137.16" y="73.66" size="1.778" layer="95"/>
+<pinref part="R5" gate="G$1" pin="1"/>
+<wire x1="149.86" y1="76.2" x2="149.86" y2="73.66" width="0.1524" layer="91"/>
 </segment>
 </net>
 <net name="N$12" class="0">
