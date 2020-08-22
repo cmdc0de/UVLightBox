@@ -18,6 +18,7 @@
 #include "menus/calibration_menu.h"
 #include <app/display_message_state.h>
 #include <driver/uart.h>
+#include <driver/gpio.h>
 #include "freertos.h"
 #include "fatfsvfs.h"
 #include "pinconfig.h"
@@ -154,7 +155,41 @@ libesp::ErrorType MyApp::onInit() {
 	
 	TouchTask.start();
 	ESP_LOGI(LOGTAG,"After Task starts: Free: %u, Min %u", System::get().getFreeHeapSize(),System::get().getMinimumFreeHeapSize());
-	
+#ifdef 0
+	gpio_config_t io_conf;
+	//disable interrupt
+	io_conf.intr_type = GPIO_INTR_DISABLE;
+	//set as output mode
+	io_conf.mode = GPIO_MODE_OUTPUT;
+	//bit mask of the pins that you want to set,e.g.GPIO18/19
+	io_conf.pin_bit_mask = ((1UL<<PIN_BLUE) | (1UL<<PIN_GREEN) | (1UL<<PIN_RED));
+	//disable pull-down mode
+	io_conf.pull_down_en = GPIO_PULLDOWN_DISABLE;
+	//disable pull-up mode
+	io_conf.pull_up_en = GPIO_PULLUP_DISABLE;
+	//configure GPIO with the given settings
+	gpio_config(&io_conf);
+	gpio_set_level(PIN_RED, 1);
+	gpio_set_level(PIN_GREEN, 0);
+	gpio_set_level(PIN_BLUE, 0);
+	vTaskDelay(1000 / portTICK_RATE_MS);
+	gpio_set_level(PIN_RED, 0);
+	gpio_set_level(PIN_GREEN, 1);
+	gpio_set_level(PIN_BLUE, 0);
+	vTaskDelay(1000 / portTICK_RATE_MS);
+	gpio_set_level(PIN_RED, 0);
+	gpio_set_level(PIN_GREEN, 0);
+	gpio_set_level(PIN_BLUE, 1);
+	vTaskDelay(1000 / portTICK_RATE_MS);
+	gpio_set_level(PIN_RED, 0);
+	gpio_set_level(PIN_GREEN, 0);
+	gpio_set_level(PIN_BLUE, 0);
+	vTaskDelay(1000 / portTICK_RATE_MS);
+	gpio_set_level(PIN_RED, 1);
+	gpio_set_level(PIN_GREEN, 1);
+	gpio_set_level(PIN_BLUE, 1);
+	vTaskDelay(1000 / portTICK_RATE_MS);
+#endif
 	setCurrentMenu(getMenuState());
 	return et;
 }
