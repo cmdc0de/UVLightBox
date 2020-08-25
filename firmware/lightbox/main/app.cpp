@@ -22,6 +22,7 @@
 #include "freertos.h"
 #include "fatfsvfs.h"
 #include "pinconfig.h"
+#include <device/leds/rgb4pinled.h>
 
 using libesp::ErrorType;
 using libesp::DisplayILI9341;
@@ -54,6 +55,7 @@ libesp::ScalingBuffer FrameBuf(&Display, MyApp::FRAME_BUFFER_WIDTH, MyApp::FRAME
 static GUI MyGui(&Display);
 static XPT2046 TouchTask(PIN_NUM_TOUCH_IRQ,true);
 static CalibrationMenu MyCalibrationMenu;
+static libesp::LED4Pin StatusLED(libesp::RGB::BLUE, PIN_RED, PIN_GREEN, PIN_BLUE);
 
 const char *MyErrorMap::toString(int32_t err) {
 	return "TODO";
@@ -155,7 +157,7 @@ libesp::ErrorType MyApp::onInit() {
 	
 	TouchTask.start();
 	ESP_LOGI(LOGTAG,"After Task starts: Free: %u, Min %u", System::get().getFreeHeapSize(),System::get().getMinimumFreeHeapSize());
-#ifdef 0
+#if 0
 	gpio_config_t io_conf;
 	//disable interrupt
 	io_conf.intr_type = GPIO_INTR_DISABLE;
@@ -189,6 +191,31 @@ libesp::ErrorType MyApp::onInit() {
 	gpio_set_level(PIN_GREEN, 1);
 	gpio_set_level(PIN_BLUE, 1);
 	vTaskDelay(1000 / portTICK_RATE_MS);
+#else
+	ledc_timer_config_t t;
+	t.speed_mode = LEDC_HIGH_SPEED_MODE;
+	t.duty_resolution = LEDC_TIMER_8_BIT;
+	t.timer_num = LEDC_TIMER_0;
+	t.freq_hz = 5000;
+	StatusLED.init(t);
+	vTaskDelay(3000 / portTICK_RATE_MS);
+	libesp::RGB c(127,0,0);
+	StatusLED.setColor(c);
+	vTaskDelay(1000 / portTICK_RATE_MS);
+	c.setRed(0);
+	c.setGreen(255);
+	c.setBlue(0);
+	StatusLED.setColor(c);
+	vTaskDelay(1000 / portTICK_RATE_MS);
+	c.setRed(0);
+	c.setGreen(0);
+	c.setBlue(255);
+	StatusLED.setColor(c);
+	vTaskDelay(1000 / portTICK_RATE_MS);
+	c.setBlue(1);
+	StatusLED.setColor(c);
+	vTaskDelay(1000 / portTICK_RATE_MS);
+	StatusLED.stop();
 #endif
 	setCurrentMenu(getMenuState());
 	return et;
