@@ -10,7 +10,7 @@ RUN apt clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 # Setup IDF_PATH
 RUN mkdir -p /esp
 
-RUN cd /esp && git clone --branch v4.1-beta2 --depth 1 --recursive https://github.com/espressif/esp-idf.git && chmod -R 775 esp-idf
+RUN cd /esp && git clone --branch v4.1 --depth 1 --recursive https://github.com/espressif/esp-idf.git && chmod -R 775 esp-idf
 ENV IDF_PATH /esp/esp-idf
 
 # Add the toolchain binaries to PATH
