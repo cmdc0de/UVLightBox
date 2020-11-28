@@ -189,6 +189,7 @@
 <wire x1="100" y1="0" x2="100" y2="60" width="0" layer="20"/>
 <wire x1="100" y1="60" x2="0" y2="60" width="0" layer="20"/>
 <wire x1="0" y1="60" x2="0" y2="0" width="0" layer="20"/>
+<text x="96.52" y="2.54" size="1.27" layer="26" rot="MR0">11282020:v3</text>
 </plain>
 <libraries>
 <library name="passives">
@@ -1307,10 +1308,16 @@ Metric Code Size 2012</description>
 </signal>
 <signal name="TOUCH_DATA_OUT">
 <contactref element="U$2" pad="13"/>
-<contactref element="U2" pad="23"/>
-<wire x1="36.068" y1="32.245" x2="36.068" y2="30.226" width="0.508" layer="16"/>
-<wire x1="36.068" y1="30.226" x2="24.102" y2="18.26" width="0.508" layer="16"/>
-<wire x1="24.102" y1="18.26" x2="9.02" y2="18.26" width="0.508" layer="16"/>
+<contactref element="U2" pad="36"/>
+<wire x1="9.02" y1="18.26" x2="14.704" y2="18.26" width="0.508" layer="1"/>
+<wire x1="14.704" y1="18.26" x2="19.177" y2="22.733" width="0.508" layer="1"/>
+<via x="19.177" y="22.733" extent="1-16" drill="0.8"/>
+<wire x1="22.86" y1="22.733" x2="35.052" y2="34.925" width="0.508" layer="16"/>
+<wire x1="35.052" y1="34.925" x2="35.052" y2="46.355" width="0.508" layer="16"/>
+<wire x1="35.052" y1="46.355" x2="33.655" y2="47.752" width="0.508" layer="16"/>
+<wire x1="33.655" y1="47.752" x2="31.56" y2="47.752" width="0.508" layer="16"/>
+<wire x1="31.56" y1="47.752" x2="31.513" y2="47.705" width="0.508" layer="16"/>
+<wire x1="19.177" y1="22.733" x2="22.86" y2="22.733" width="0.508" layer="16"/>
 </signal>
 <signal name="TOUCH_IRQ">
 <contactref element="U$2" pad="14"/>
