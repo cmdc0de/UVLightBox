@@ -54,7 +54,7 @@ libesp::ScalingBuffer FrameBuf(&Display, MyApp::FRAME_BUFFER_WIDTH, MyApp::FRAME
 
 static GUI MyGui(&Display);
 static XPT2046 TouchTask(PIN_NUM_TOUCH_IRQ,true);
-static CalibrationMenu MyCalibrationMenu;
+static CalibrationMenu MyCalibrationMenu("nvs");
 static libesp::LED4Pin StatusLED(libesp::RGB::BLUE, PIN_RED, PIN_GREEN, PIN_BLUE);
 
 const char *MyErrorMap::toString(int32_t err) {
@@ -90,8 +90,26 @@ XPT2046 &MyApp::getTouch() {
 
 libesp::ErrorType MyApp::onInit() {
 	ErrorType et;
-
 	ESP_LOGI(LOGTAG,"OnInit: Free: %u, Min %u", System::get().getFreeHeapSize(),System::get().getMinimumFreeHeapSize());
+
+	{
+		ESP_LOGI(LOGTAG,"init UV PWR Pin to low");
+		gpio_config_t io_conf;
+		//disable interrupt
+		io_conf.intr_type = GPIO_INTR_DISABLE;
+		//set as output mode
+		io_conf.mode = GPIO_MODE_OUTPUT;
+		//bit mask of the pins that you want to set,e.g.GPIO18/19
+		io_conf.pin_bit_mask = ((1UL<<PIN_UV_CONTROL));
+		//disable pull-down mode
+		io_conf.pull_down_en = GPIO_PULLDOWN_DISABLE;
+		//disable pull-up mode
+		io_conf.pull_up_en = GPIO_PULLUP_DISABLE;
+		//configure GPIO with the given settings
+		gpio_config(&io_conf);
+		setUVLEDControl(false);
+	}
+
 
 	et = MyCalibrationMenu.initNVS();
 	if(!et.ok()) {
@@ -157,68 +175,47 @@ libesp::ErrorType MyApp::onInit() {
 	
 	TouchTask.start();
 	ESP_LOGI(LOGTAG,"After Task starts: Free: %u, Min %u", System::get().getFreeHeapSize(),System::get().getMinimumFreeHeapSize());
-#if 0
-	gpio_config_t io_conf;
-	//disable interrupt
-	io_conf.intr_type = GPIO_INTR_DISABLE;
-	//set as output mode
-	io_conf.mode = GPIO_MODE_OUTPUT;
-	//bit mask of the pins that you want to set,e.g.GPIO18/19
-	io_conf.pin_bit_mask = ((1UL<<PIN_BLUE) | (1UL<<PIN_GREEN) | (1UL<<PIN_RED));
-	//disable pull-down mode
-	io_conf.pull_down_en = GPIO_PULLDOWN_DISABLE;
-	//disable pull-up mode
-	io_conf.pull_up_en = GPIO_PULLUP_DISABLE;
-	//configure GPIO with the given settings
-	gpio_config(&io_conf);
-	gpio_set_level(PIN_RED, 1);
-	gpio_set_level(PIN_GREEN, 0);
-	gpio_set_level(PIN_BLUE, 0);
-	vTaskDelay(1000 / portTICK_RATE_MS);
-	gpio_set_level(PIN_RED, 0);
-	gpio_set_level(PIN_GREEN, 1);
-	gpio_set_level(PIN_BLUE, 0);
-	vTaskDelay(1000 / portTICK_RATE_MS);
-	gpio_set_level(PIN_RED, 0);
-	gpio_set_level(PIN_GREEN, 0);
-	gpio_set_level(PIN_BLUE, 1);
-	vTaskDelay(1000 / portTICK_RATE_MS);
-	gpio_set_level(PIN_RED, 0);
-	gpio_set_level(PIN_GREEN, 0);
-	gpio_set_level(PIN_BLUE, 0);
-	vTaskDelay(1000 / portTICK_RATE_MS);
-	gpio_set_level(PIN_RED, 1);
-	gpio_set_level(PIN_GREEN, 1);
-	gpio_set_level(PIN_BLUE, 1);
-	vTaskDelay(1000 / portTICK_RATE_MS);
-#else
+
 	ledc_timer_config_t t;
 	t.speed_mode = LEDC_HIGH_SPEED_MODE;
 	t.duty_resolution = LEDC_TIMER_8_BIT;
 	t.timer_num = LEDC_TIMER_0;
-	t.freq_hz = 5000;
+	t.clk_cfg = LEDC_AUTO_CLK;
+	t.freq_hz = 512;
 	StatusLED.init(t);
 	vTaskDelay(3000 / portTICK_RATE_MS);
 	libesp::RGB c(127,0,0);
 	StatusLED.setColor(c);
 	vTaskDelay(1000 / portTICK_RATE_MS);
 	c.setRed(0);
-	c.setGreen(255);
+	c.setGreen(250);
 	c.setBlue(0);
 	StatusLED.setColor(c);
 	vTaskDelay(1000 / portTICK_RATE_MS);
 	c.setRed(0);
 	c.setGreen(0);
-	c.setBlue(255);
+	c.setBlue(250);
 	StatusLED.setColor(c);
 	vTaskDelay(1000 / portTICK_RATE_MS);
 	c.setBlue(1);
 	StatusLED.setColor(c);
 	vTaskDelay(1000 / portTICK_RATE_MS);
 	StatusLED.stop();
-#endif
-	setCurrentMenu(getMenuState());
+
+	if(MyCalibrationMenu.hasBeenCalibrated()) {
+		setCurrentMenu(getCalibrationMenu());
+	} else {
+		setCurrentMenu(getMenuState());
+	}
 	return et;
+}
+
+void MyApp::setUVLEDControl(bool bOn) {
+	gpio_set_level(PIN_UV_CONTROL, (bOn ? 1 : 0));
+}
+
+bool MyApp::isUVLEDOn() const {
+	return gpio_get_level(PIN_UV_CONTROL)==1;
 }
 
 uint16_t MyApp::getCanvasWidth() {

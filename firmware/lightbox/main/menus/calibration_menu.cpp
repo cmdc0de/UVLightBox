@@ -16,7 +16,7 @@ const char *CalibrationMenu::LOGTAG = "CalibrationMenu";
 static StaticQueue_t InternalQueue;
 static uint8_t InternalQueueBuffer[CalibrationMenu::QUEUE_SIZE*CalibrationMenu::MSG_SIZE] = {0};
 
-CalibrationMenu::CalibrationMenu() : AppBaseMenu(), CalibrationLocations(), CurrentIndex(TOTAL), CalibrationData("nvs","cd", false), Min(), Max(), Range() {
+CalibrationMenu::CalibrationMenu(const char *NVSPartitionName) : AppBaseMenu(), CalibrationLocations(), CurrentIndex(TOTAL), CalibrationData(NVSPartitionName,"cd", false), Min(), Max(), Range() {
 	InternalQueueHandler = xQueueCreateStatic(QUEUE_SIZE,MSG_SIZE,&InternalQueueBuffer[0],&InternalQueue);
 }
 
@@ -36,6 +36,11 @@ ErrorType CalibrationMenu::loadCalibrationData() {
 		calculate();
 	}
 	return et;
+}
+
+bool CalibrationMenu::hasBeenCalibrated() {
+	size_t size = sizeof(CalibrationLocations);
+	return CalibrationData.getBlob("caldata",&CalibrationLocations[0],size)!=ESP_OK;
 }
 
 void CalibrationMenu::calculate() {
@@ -74,6 +79,15 @@ Point2Ds CalibrationMenu::getPickPoint(const Point2Ds &pickPos) {
 
 ErrorType CalibrationMenu::initNVS() {
 	ErrorType et = CalibrationData.init();
+	if(!et.ok()) {
+		ESP_LOGI(LOGTAG, "1st InitNVS failed bc %s\n", et.toString());
+		et = CalibrationData.initStorage();
+		if(et.ok()) {
+			et = CalibrationData.init();
+		} else {
+			ESP_LOGI(LOGTAG, "initStorage failed %s\n", et.toString());
+		}
+	}
 	if(et.ok()) {
 		CalibrationData.logInfo();
 		et = loadCalibrationData();
@@ -155,9 +169,6 @@ libesp::BaseMenu::ReturnStateContext CalibrationMenu::onRun() {
 		delete pe;
 	}
 
-	//if (MyApp::get().getButtonInfo().wasAnyButtonReleased()) {
-//		nextState = MyApp::get().getMenuState();
-	//} else 
 	if(CurrentIndex>=TOTAL) {
 		//save array
 		ErrorType et = CalibrationData.setBlob("caldata",&CalibrationLocations[0],sizeof(CalibrationLocations));

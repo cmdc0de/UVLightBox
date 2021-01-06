@@ -23,10 +23,11 @@ public:
 		, TOTAL = LAST + 1
 	};
 public:
-	CalibrationMenu();
+	CalibrationMenu(const char *NVSPartitionName);
 	virtual ~CalibrationMenu();
 	libesp::ErrorType initNVS();
 	libesp::Point2Ds getPickPoint(const libesp::Point2Ds &pickPos);
+	bool hasBeenCalibrated();
 protected:
 	virtual libesp::ErrorType onInit();
 	virtual libesp::BaseMenu::ReturnStateContext onRun();

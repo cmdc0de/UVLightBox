@@ -71,6 +71,9 @@ public:
 	libesp::XPT2046 &getTouch();
 	uint8_t *getBackBuffer();
 	uint32_t getBackBufferSize();
+	//turn on UVLights
+	void setUVLEDControl(bool bOn);
+	bool isUVLEDOn() const;
 
 protected:
 	MyApp();
