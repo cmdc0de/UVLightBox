@@ -16,14 +16,22 @@ static StaticQueue_t InternalQueue;
 static uint8_t InternalQueueBuffer[MenuState::QUEUE_SIZE*MenuState::MSG_SIZE] = {0};
 static const char *LOGTAG = "MenuState";
 
+libesp::AABBox2D StartTimeBV(Point2Ds(0,0), 10);
+libesp::Button StartTimerButton(StartTimeBV,RGBColor::BLUE, RGBColor::RED);
+static const int8_t NUM_INTERFACE_ITEMS = 1;
+libesp::StaticGridLayout::DrawInfo InterfaceElements[NUM_INTERFACE_ITEMS] = {&StartTimerButton};
+
+
+
 MenuState::MenuState() :
 	AppBaseMenu(), MenuList("Main Menu", Items, 0, 0, 
-	MyApp::get().getLastCanvasWidthPixel(), MyApp::get().getLastCanvasHeightPixel(), 0, ItemCount) {
+	MyApp::get().getLastCanvasWidthPixel(), MyApp::get().getLastCanvasHeightPixel(), 0, ItemCount),	MyLayout(&InterfaceElements[0],NUM_INTERFACE_ITEMS,uint8_t(4) ,uint16_t(0), uint16_t(0), false){
 
 	ESP_LOGI(LOGTAG,"menulist: %d %d",MyApp::get().getLastCanvasWidthPixel(),
 						 MyApp::get().getLastCanvasHeightPixel());
 	
 	InternalQueueHandler = xQueueCreateStatic(QUEUE_SIZE,MSG_SIZE,&InternalQueueBuffer[0],&InternalQueue);
+	MyLayout.init();
 }
 
 MenuState::~MenuState() {
@@ -106,7 +114,8 @@ libesp::BaseMenu::ReturnStateContext MenuState::onRun() {
 		}
 	}
 
-	MyApp::get().getGUI().drawList(&this->MenuList);
+	//MyApp::get().getGUI().drawList(&this->MenuList);
+	MyLayout.draw(&MyApp::get().getDisplay());
 	return BaseMenu::ReturnStateContext(nextState);
 }
 

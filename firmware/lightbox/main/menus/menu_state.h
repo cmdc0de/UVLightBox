@@ -3,6 +3,7 @@
 
 #include "appbase_menu.h"
 #include <device/touch/XPT2046.h>
+#include <device/display/layout.h>
 
 class MenuState: public AppBaseMenu {
 public:
@@ -19,6 +20,7 @@ private:
 	libesp::GUIListItemData Items[10];
 	QueueHandle_t InternalQueueHandler;
 	static const uint16_t ItemCount = uint16_t(sizeof(Items) / sizeof(Items[0]));
+	libesp::StaticGridLayout MyLayout;
 };
 
 #endif
