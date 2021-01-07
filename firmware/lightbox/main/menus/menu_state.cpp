@@ -17,15 +17,16 @@ static uint8_t InternalQueueBuffer[MenuState::QUEUE_SIZE*MenuState::MSG_SIZE] = 
 static const char *LOGTAG = "MenuState";
 
 libesp::AABBox2D StartTimeBV(Point2Ds(0,0), 10);
-libesp::Button StartTimerButton(StartTimeBV,RGBColor::BLUE, RGBColor::RED);
+libesp::Button StartTimerButton((const char *)"Set Timer", uint16_t(0), &StartTimeBV,RGBColor::BLUE, RGBColor::RED);
 static const int8_t NUM_INTERFACE_ITEMS = 1;
-libesp::StaticGridLayout::DrawInfo InterfaceElements[NUM_INTERFACE_ITEMS] = {&StartTimerButton};
+libesp::Widget *InterfaceElements[NUM_INTERFACE_ITEMS] = {&StartTimerButton};
 
 
 
 MenuState::MenuState() :
 	AppBaseMenu(), MenuList("Main Menu", Items, 0, 0, 
-	MyApp::get().getLastCanvasWidthPixel(), MyApp::get().getLastCanvasHeightPixel(), 0, ItemCount),	MyLayout(&InterfaceElements[0],NUM_INTERFACE_ITEMS,uint8_t(4) ,uint16_t(0), uint16_t(0), false){
+	MyApp::get().getLastCanvasWidthPixel(), MyApp::get().getLastCanvasHeightPixel(), 0, ItemCount),
+	MyLayout(&InterfaceElements[0],NUM_INTERFACE_ITEMS,uint8_t(4) , MyApp::get().getLastCanvasWidthPixel(), MyApp::get().getLastCanvasHeightPixel(), false){
 
 	ESP_LOGI(LOGTAG,"menulist: %d %d",MyApp::get().getLastCanvasWidthPixel(),
 						 MyApp::get().getLastCanvasHeightPixel());
@@ -82,40 +83,32 @@ ErrorType MenuState::onInit() {
 
 libesp::BaseMenu::ReturnStateContext MenuState::onRun() {
 	BaseMenu *nextState = this;
+
 	TouchNotification *pe = nullptr;
+	Point2Ds TouchPosInBuf;
+	libesp::Widget *widgetHit = nullptr;
 	bool penUp = false;
-	bool hdrHit = false;
-	pe = processTouch(InternalQueueHandler, MenuList, ItemCount, penUp, hdrHit);
-	if (pe) {
-		if (penUp ) {
-			switch (MenuList.getSelectedItemID()) {
-				case 0:
-					break;
-				case 1:
-					break;
-				case 2:
-					break;
-				case 3:
-					break;
-				case 4:
-					break;
-				case 5:
-					break;
-				case 6:
-					break;
-				case 7:
-					break;
-				case 8:
-					nextState = MyApp::get().getCalibrationMenu();
-					break;
-				case 9:
-					break;
-			}
+	if(xQueueReceive(InternalQueueHandler, &pe, 0)) {
+		ESP_LOGI(LOGTAG,"que");
+		Point2Ds screenPoint(pe->getX(),pe->getY());
+		TouchPosInBuf = MyApp::get().getCalibrationMenu()->getPickPoint(screenPoint);
+		ESP_LOGI(LOGTAG,"TouchPoint: X:%d Y:%d PD:%d", int32_t(TouchPosInBuf.getX()),
+								 int32_t(TouchPosInBuf.getY()), pe->isPenDown()?1:0);
+		penUp = !pe->isPenDown();
+		delete pe;
+		widgetHit = MyLayout.pick(TouchPosInBuf);
+	}
+
+	MyLayout.draw(&MyApp::get().getDisplay());
+
+	if(widgetHit) {
+		switch(widgetHit->getWidgetID()) {
+		case 0:
+			nextState = MyApp::get().getMenuState();
+			break;
 		}
 	}
 
-	//MyApp::get().getGUI().drawList(&this->MenuList);
-	MyLayout.draw(&MyApp::get().getDisplay());
 	return BaseMenu::ReturnStateContext(nextState);
 }
 
