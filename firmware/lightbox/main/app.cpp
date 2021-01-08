@@ -23,6 +23,7 @@
 #include "fatfsvfs.h"
 #include "pinconfig.h"
 #include <device/leds/rgb4pinled.h>
+#include "menus/timer_menu.h"
 
 using libesp::ErrorType;
 using libesp::DisplayILI9341;
@@ -157,10 +158,10 @@ libesp::ErrorType MyApp::onInit() {
 		vTaskDelay(500 / portTICK_RATE_MS);
 		Display.fillRec(0,15,FRAME_BUFFER_WIDTH/2,10,libesp::RGBColor::WHITE);
 		Display.swap();
-		vTaskDelay(1000 / portTICK_RATE_MS);
+		vTaskDelay(500 / portTICK_RATE_MS);
 		Display.fillRec(0,30,FRAME_BUFFER_WIDTH,10,libesp::RGBColor::BLUE);
 		Display.swap();
-		vTaskDelay(1000 / portTICK_RATE_MS);
+		vTaskDelay(500 / portTICK_RATE_MS);
 		Display.drawRec(0,60,FRAME_BUFFER_WIDTH/2,20, libesp::RGBColor::GREEN);
 		Display.drawString(15,110,"Color Validation.",libesp::RGBColor::RED);
 		Display.drawString(30,120,"UVLight Box",libesp::RGBColor::BLUE, libesp::RGBColor::WHITE,1,false);
@@ -183,23 +184,23 @@ libesp::ErrorType MyApp::onInit() {
 	t.clk_cfg = LEDC_AUTO_CLK;
 	t.freq_hz = 512;
 	StatusLED.init(t);
-	vTaskDelay(3000 / portTICK_RATE_MS);
+	vTaskDelay(500 / portTICK_RATE_MS);
 	libesp::RGB c(127,0,0);
 	StatusLED.setColor(c);
-	vTaskDelay(1000 / portTICK_RATE_MS);
+	vTaskDelay(500 / portTICK_RATE_MS);
 	c.setRed(0);
 	c.setGreen(250);
 	c.setBlue(0);
 	StatusLED.setColor(c);
-	vTaskDelay(1000 / portTICK_RATE_MS);
+	vTaskDelay(500 / portTICK_RATE_MS);
 	c.setRed(0);
 	c.setGreen(0);
 	c.setBlue(250);
 	StatusLED.setColor(c);
-	vTaskDelay(1000 / portTICK_RATE_MS);
+	vTaskDelay(500 / portTICK_RATE_MS);
 	c.setBlue(1);
 	StatusLED.setColor(c);
-	vTaskDelay(1000 / portTICK_RATE_MS);
+	vTaskDelay(500 / portTICK_RATE_MS);
 	StatusLED.stop();
 
 	if(MyCalibrationMenu.hasBeenCalibrated()) {
@@ -275,6 +276,11 @@ ErrorType MyApp::onRun() {
 
 MenuState MyMenuState;
 libesp::DisplayMessageState DMS;
+TimerMenu MyTimerMenu;
+
+TimerMenu *MyApp::getTimerMenu() {
+	return &MyTimerMenu;
+}
 	
 MenuState *MyApp::getMenuState() {
 	return &MyMenuState;

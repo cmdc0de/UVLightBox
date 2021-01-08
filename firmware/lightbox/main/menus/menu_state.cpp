@@ -2,6 +2,7 @@
 #include "../app.h"
 #include "gui_list_processor.h"
 #include "calibration_menu.h"
+#include "timer_menu.h"
 #include <app/display_message_state.h>
 #include <esp_log.h>
 
@@ -16,20 +17,16 @@ static StaticQueue_t InternalQueue;
 static uint8_t InternalQueueBuffer[MenuState::QUEUE_SIZE*MenuState::MSG_SIZE] = {0};
 static const char *LOGTAG = "MenuState";
 
-libesp::AABBox2D StartTimeBV(Point2Ds(0,0), 10);
-libesp::Button StartTimerButton((const char *)"Set Timer", uint16_t(0), &StartTimeBV,RGBColor::BLUE, RGBColor::RED);
+static libesp::AABBox2D StartTimeBV(Point2Ds(34,34), 30);
+static libesp::Button StartTimerButton((const char *)"Set Timer", uint16_t(0), &StartTimeBV,RGBColor::BLUE, RGBColor::RED);
 static const int8_t NUM_INTERFACE_ITEMS = 1;
-libesp::Widget *InterfaceElements[NUM_INTERFACE_ITEMS] = {&StartTimerButton};
+static libesp::Widget *InterfaceElements[NUM_INTERFACE_ITEMS] = {&StartTimerButton};
 
 
 
 MenuState::MenuState() :
-	AppBaseMenu(), MenuList("Main Menu", Items, 0, 0, 
-	MyApp::get().getLastCanvasWidthPixel(), MyApp::get().getLastCanvasHeightPixel(), 0, ItemCount),
-	MyLayout(&InterfaceElements[0],NUM_INTERFACE_ITEMS,uint8_t(4) , MyApp::get().getLastCanvasWidthPixel(), MyApp::get().getLastCanvasHeightPixel(), false){
-
-	ESP_LOGI(LOGTAG,"menulist: %d %d",MyApp::get().getLastCanvasWidthPixel(),
-						 MyApp::get().getLastCanvasHeightPixel());
+	AppBaseMenu(), //MenuList("Main Menu", Items, 0, 0, MyApp::get().getLastCanvasWidthPixel(), MyApp::get().getLastCanvasHeightPixel(), 0, ItemCount),
+	MyLayout(&InterfaceElements[0],NUM_INTERFACE_ITEMS, MyApp::get().getLastCanvasWidthPixel(), MyApp::get().getLastCanvasHeightPixel(), false){
 	
 	InternalQueueHandler = xQueueCreateStatic(QUEUE_SIZE,MSG_SIZE,&InternalQueueBuffer[0],&InternalQueue);
 	MyLayout.init();
@@ -41,6 +38,7 @@ MenuState::~MenuState() {
 
 
 ErrorType MenuState::onInit() {
+	/*
 	Items[0].id = 0;
 	//if (MyApp::get().getContacts().getSettings().isNameSet()) {
 	//	Items[0].text = (const char *) "Settings";
@@ -67,8 +65,9 @@ ErrorType MenuState::onInit() {
 	Items[8].text = (const char *) "Calibrate Touch";
 	Items[9].id = 9;
 	Items[9].text = (const char *) "Connected Devices";
+	*/
 	MyApp::get().getDisplay().fillScreen(RGBColor::BLACK);
-	MyApp::get().getGUI().drawList(&this->MenuList);
+	//MyApp::get().getGUI().drawList(&this->MenuList);
 	//empty queue
 	TouchNotification *pe = nullptr;
 	for(int i=0;i<2;i++) {
@@ -102,9 +101,10 @@ libesp::BaseMenu::ReturnStateContext MenuState::onRun() {
 	MyLayout.draw(&MyApp::get().getDisplay());
 
 	if(widgetHit) {
+		ESP_LOGI(LOGTAG, "Widget %s hit\n", widgetHit->getName());
 		switch(widgetHit->getWidgetID()) {
 		case 0:
-			nextState = MyApp::get().getMenuState();
+			nextState = MyApp::get().getTimerMenu();
 			break;
 		}
 	}
