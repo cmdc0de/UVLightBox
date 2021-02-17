@@ -16,12 +16,12 @@ static StaticQueue_t InternalQueue;
 static uint8_t InternalQueueBuffer[TimerMenu::QUEUE_SIZE*TimerMenu::MSG_SIZE] = {0};
 const char *TimerMenu::LOGTAG = "TimerMenu";
 
-static libesp::AABBox2D UpArrow(Point2Ds(140,50), 20);
+static libesp::AABBox2D UpArrow(Point2Ds(163,50), 20);
 static libesp::Button UpArrowButton((const char *)"Up", uint16_t(0), &UpArrow,RGBColor::BLUE, RGBColor::RED);
-static libesp::AABBox2D DownArrow(Point2Ds(140,95), 20);
+static libesp::AABBox2D DownArrow(Point2Ds(163,95), 20);
 static libesp::Button DownArrowButton((const char *)"Down", uint16_t(1), &DownArrow,RGBColor::BLUE, RGBColor::RED);
-static libesp::AABBox2D Clock(Point2Ds(65,72), 50);
-static libesp::Button ClockWidget((const char *)"Clock", uint16_t(2), &Clock,RGBColor::BLUE, RGBColor::RED);
+static libesp::AABBox2D Clock(Point2Ds(75,72), 64);
+static libesp::CountDownTimer ClockWidget(&Clock, (const char *)"Clock", uint16_t(2),300);
 
 static const int8_t NUM_INTERFACE_ITEMS = 3;
 static libesp::Widget *InterfaceElements[NUM_INTERFACE_ITEMS] = {&ClockWidget,&UpArrowButton,&DownArrowButton};
