@@ -32,7 +32,7 @@ TimerMenu::TimerMenu() :
 	AppBaseMenu(), MyLayout(&InterfaceElements[0],NUM_INTERFACE_ITEMS, MyApp::get().getLastCanvasWidthPixel(), MyApp::get().getLastCanvasHeightPixel(), false) {
 	
 	InternalQueueHandler = xQueueCreateStatic(QUEUE_SIZE,MSG_SIZE,&InternalQueueBuffer[0],&InternalQueue);
-	MyLayout.init();
+	MyLayout.reset();
 }
 
 TimerMenu::~TimerMenu() {
@@ -50,7 +50,7 @@ ErrorType TimerMenu::onInit() {
 		}
 	}
 	MyApp::get().getTouch().addObserver(InternalQueueHandler);
-	//MyLayout.draw(&MyApp::get().getDisplay());
+	MyLayout.reset();
 
 	return ErrorType();
 }
