@@ -22,10 +22,15 @@ static libesp::AABBox2D DownArrow(Point2Ds(163,95), 20);
 static libesp::Button DownArrowButton((const char *)"Down", uint16_t(1), &DownArrow,RGBColor::BLUE, RGBColor::RED);
 static libesp::AABBox2D Clock(Point2Ds(75,72), 64);
 static libesp::CountDownTimer ClockWidget(&Clock, (const char *)"Clock", uint16_t(2),300);
+static libesp::AABBox2D SetMin(Point2Ds(80,140),15);
+static libesp::Button SetMinButton((const char *)"MinButton", uint16_t(3), &SetMin,RGBColor::BLUE, RGBColor::RED);
+static libesp::AABBox2D SetSec(Point2Ds(100,140),15);
+static libesp::Button SetSecButton((const char *)"SecButton", uint16_t(4), &SetSec,RGBColor::BLUE, RGBColor::RED);
+static libesp::AABBox2D Close(Point2Ds(305,0),15);
+static libesp::Button CloseButton((const char *)"CloseButton", uint16_t(1000), &Close,RGBColor::RED, RGBColor::BLUE);
 
-static const int8_t NUM_INTERFACE_ITEMS = 3;
-static libesp::Widget *InterfaceElements[NUM_INTERFACE_ITEMS] = {&ClockWidget,&UpArrowButton,&DownArrowButton};
-
+static const int8_t NUM_INTERFACE_ITEMS = 5;
+static libesp::Widget *InterfaceElements[NUM_INTERFACE_ITEMS] = {&ClockWidget,&UpArrowButton,&DownArrowButton,&SetMinButton, &SetSecButton};
 
 
 TimerMenu::TimerMenu() :
@@ -72,22 +77,45 @@ libesp::BaseMenu::ReturnStateContext TimerMenu::onRun() {
 		delete pe;
 		widgetHit = MyLayout.pick(TouchPosInBuf);
 	}
-
-	//MyApp::get().getDisplay().drawRec(120,30,30,30, libesp::RGBColor::GREEN);
-	MyLayout.draw(&MyApp::get().getDisplay());
-
-
-	//MyApp::get().getDisplay().drawRec(100,80,20,20, libesp::RGBColor::GREEN);
-	//MyApp::get().getDisplay().drawRec(5,47,50,50, libesp::RGBColor::GREEN);
-
 	if(widgetHit) {
 		ESP_LOGI(LOGTAG, "Widget %s hit\n", widgetHit->getName());
-		//switch(widgetHit->getWidgetID()) {
-		//case 0:
-			//nextState = MyApp::get().getMenuState();
-			//break;
-		//}
+		switch(widgetHit->getWidgetID()) {
+		case 0:
+			if(SetMinButton.isSelected()) {
+				ClockWidget.incrementTime(60);
+			} else {
+				ClockWidget.incrementTime(10);
+			}
+			break;
+		case 1:
+			if(SetMinButton.isSelected()) {
+				ClockWidget.incrementTime(-60);
+			} else {
+				ClockWidget.incrementTime(-10);
+			}
+			break;
+		case 3:
+			if(penUp) {
+				SetMinButton.setSelected(true);
+				SetSecButton.setSelected(false);
+			}
+			break;
+		case 4:
+			if(penUp) {
+				SetMinButton.setSelected(false);
+				SetSecButton.setSelected(true);
+			}
+			break;
+		case 1000:
+			if(penUp) {
+				nextState = MyApp::get().getMenuState();
+			}
+			break;
+		default:
+			break;
+		}
 	}
+	MyLayout.draw(&MyApp::get().getDisplay());
 
 	return BaseMenu::ReturnStateContext(nextState);
 }
