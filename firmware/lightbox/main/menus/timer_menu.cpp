@@ -1,8 +1,10 @@
 #include "timer_menu.h"
 #include "../app.h"
+#include <math/rectbbox.h>
 #include "gui_list_processor.h"
 #include "calibration_menu.h"
 #include <app/display_message_state.h>
+#include "menu_state.h"
 #include <esp_log.h>
 
 using libesp::ErrorType;
@@ -16,21 +18,21 @@ static StaticQueue_t InternalQueue;
 static uint8_t InternalQueueBuffer[TimerMenu::QUEUE_SIZE*TimerMenu::MSG_SIZE] = {0};
 const char *TimerMenu::LOGTAG = "TimerMenu";
 
-static libesp::AABBox2D UpArrow(Point2Ds(163,50), 20);
+static libesp::AABBox2D UpArrow(Point2Ds(155,37), 20);
 static libesp::Button UpArrowButton((const char *)"Up", uint16_t(0), &UpArrow,RGBColor::BLUE, RGBColor::RED);
-static libesp::AABBox2D DownArrow(Point2Ds(163,95), 20);
+static libesp::AABBox2D DownArrow(Point2Ds(155,82), 20);
 static libesp::Button DownArrowButton((const char *)"Down", uint16_t(1), &DownArrow,RGBColor::BLUE, RGBColor::RED);
-static libesp::AABBox2D Clock(Point2Ds(75,72), 64);
+static libesp::RectBBox2D Clock(Point2Ds(75,55), 55, 48);
 static libesp::CountDownTimer ClockWidget(&Clock, (const char *)"Clock", uint16_t(2),300);
-static libesp::AABBox2D SetMin(Point2Ds(80,140),15);
-static libesp::Button SetMinButton((const char *)"MinButton", uint16_t(3), &SetMin,RGBColor::BLUE, RGBColor::RED);
-static libesp::AABBox2D SetSec(Point2Ds(100,140),15);
-static libesp::Button SetSecButton((const char *)"SecButton", uint16_t(4), &SetSec,RGBColor::BLUE, RGBColor::RED);
-static libesp::AABBox2D Close(Point2Ds(305,0),15);
-static libesp::Button CloseButton((const char *)"CloseButton", uint16_t(1000), &Close,RGBColor::RED, RGBColor::BLUE);
+static libesp::AABBox2D SetMin(Point2Ds(60,125),15);
+static libesp::Button SetMinButton((const char *)"Min", uint16_t(3), &SetMin,RGBColor::BLUE, RGBColor::RED);
+static libesp::AABBox2D SetSec(Point2Ds(100,125),15);
+static libesp::Button SetSecButton((const char *)"Sec", uint16_t(4), &SetSec,RGBColor::BLUE, RGBColor::RED);
+static libesp::AABBox2D Close(Point2Ds(185,7),6);
+static libesp::Button CloseButton((const char *)"X", uint16_t(1000), &Close,RGBColor::RED, RGBColor::BLUE);
 
-static const int8_t NUM_INTERFACE_ITEMS = 5;
-static libesp::Widget *InterfaceElements[NUM_INTERFACE_ITEMS] = {&ClockWidget,&UpArrowButton,&DownArrowButton,&SetMinButton, &SetSecButton};
+static const int8_t NUM_INTERFACE_ITEMS = 6;
+static libesp::Widget *InterfaceElements[NUM_INTERFACE_ITEMS] = {&ClockWidget,&UpArrowButton,&DownArrowButton,&SetMinButton, &SetSecButton, &CloseButton};
 
 
 TimerMenu::TimerMenu() :
@@ -54,6 +56,8 @@ ErrorType TimerMenu::onInit() {
 			delete pe;
 		}
 	}
+	SetMinButton.setSelected(true);
+	SetSecButton.setSelected(false);
 	MyApp::get().getTouch().addObserver(InternalQueueHandler);
 	MyLayout.reset();
 
@@ -81,17 +85,27 @@ libesp::BaseMenu::ReturnStateContext TimerMenu::onRun() {
 		ESP_LOGI(LOGTAG, "Widget %s hit\n", widgetHit->getName());
 		switch(widgetHit->getWidgetID()) {
 		case 0:
-			if(SetMinButton.isSelected()) {
-				ClockWidget.incrementTime(60);
+			if(penUp) {
+				UpArrowButton.setSelected(false);
 			} else {
-				ClockWidget.incrementTime(10);
+				UpArrowButton.setSelected(true);
+				if(SetMinButton.isSelected()) {
+					ClockWidget.incrementTime(60);
+				} else {
+					ClockWidget.incrementTime(10);
+				}
 			}
 			break;
 		case 1:
-			if(SetMinButton.isSelected()) {
-				ClockWidget.incrementTime(-60);
+			if(penUp) {
+				DownArrowButton.setSelected(false);
 			} else {
-				ClockWidget.incrementTime(-10);
+				DownArrowButton.setSelected(true);
+				if(SetMinButton.isSelected()) {
+					ClockWidget.incrementTime(-60);
+				} else {
+					ClockWidget.incrementTime(-10);
+				}
 			}
 			break;
 		case 3:
