@@ -24,6 +24,7 @@
 #include "pinconfig.h"
 #include <device/leds/rgb4pinled.h>
 #include "menus/timer_menu.h"
+#include "menus/running_timer_menu.h"
 
 using libesp::ErrorType;
 using libesp::DisplayILI9341;
@@ -277,6 +278,7 @@ ErrorType MyApp::onRun() {
 MenuState MyMenuState;
 libesp::DisplayMessageState DMS;
 TimerMenu MyTimerMenu;
+RunningTimer MyRunningTimerMenu;
 
 TimerMenu *MyApp::getTimerMenu() {
 	return &MyTimerMenu;
@@ -290,12 +292,15 @@ CalibrationMenu *MyApp::getCalibrationMenu() {
 	return &MyCalibrationMenu;
 }
 
+RunningTimer *MyApp::getRunningTimerMenu() {
+	return &MyRunningTimerMenu;
+}
+
 DisplayMessageState *MyApp::getDisplayMessageState(BaseMenu *bm, const char *msg, uint32_t msDisplay) {
 	DMS.setMessage(msg);
 	DMS.setNextState(bm);
 	DMS.setTimeInState(msDisplay);
 	DMS.setDisplay(&Display);
 	return &DMS;
-
 }
 

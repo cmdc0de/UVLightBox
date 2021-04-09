@@ -4,6 +4,7 @@ set(srcs "./app.cpp"
 	"./menus/appbase_menu.cpp"
 	"./menus/gui_list_processor.cpp"
 	"./menus/timer_menu.cpp"
+	"./menus/running_timer_menu.cpp"
 	"./lightbox.cpp"
 )
 

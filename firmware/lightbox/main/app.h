@@ -36,6 +36,7 @@ public:
 class CalibrationMenu;
 class MenuState;
 class TimerMenu;
+class RunningTimer;
 
 class MyApp : public libesp::App {
 public:
@@ -69,6 +70,7 @@ public:
 	MenuState *getMenuState();
 	TimerMenu *getTimerMenu();
 	CalibrationMenu *getCalibrationMenu();
+	RunningTimer *getRunningTimerMenu();
 	libesp::DisplayMessageState *getDisplayMessageState(libesp::BaseMenu *, const char *msg, uint32_t msDisplay);
 	libesp::XPT2046 &getTouch();
 	uint8_t *getBackBuffer();
