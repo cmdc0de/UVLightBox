@@ -18,12 +18,12 @@ static StaticQueue_t InternalQueue;
 static uint8_t InternalQueueBuffer[RunningTimer::QUEUE_SIZE*RunningTimer::MSG_SIZE] = {0};
 const char *RunningTimer::LOGTAG = "RunningTimerMenu";
 
-static libesp::RectBBox2D Clock(Point2Ds(72,58), 60, 42);
+static libesp::RectBBox2D Clock(Point2Ds(96,58), 90, 32);
 static libesp::CountDownTimer ClockWidget(&Clock, (const char *)"Clock", uint16_t(0),300);
-static libesp::RectBBox2D Start(Point2Ds(100,125), 30, 15);
-static libesp::Button StartButton((const char *)"START", uint16_t(1),&Start,RGBColor::RED, RGBColor::BLUE);
-static libesp::RectBBox2D Stop(Point2Ds(165,125), 30, 15);
-static libesp::Button StopButton((const char *)"STOP", uint16_t(2),&Start,RGBColor::RED, RGBColor::BLUE);
+static libesp::RectBBox2D Start(Point2Ds(162,125), 36, 15);
+static libesp::Button StartButton((const char *)"RESUME", uint16_t(1),&Start,RGBColor::RED, RGBColor::BLUE);
+static libesp::RectBBox2D Stop(Point2Ds(162,125), 36, 15);
+static libesp::Button StopButton((const char *)"PAUSE", uint16_t(2),&Start,RGBColor::RED, RGBColor::BLUE);
 static libesp::AABBox2D Close(Point2Ds(185,7),6);
 static libesp::Button CloseButton((const char *)"X", uint16_t(1000), &Close,RGBColor::RED, RGBColor::BLUE);
 
@@ -52,11 +52,12 @@ ErrorType RunningTimer::onInit() {
 		}
 	}
 	MyApp::get().getTouch().addObserver(InternalQueueHandler);
+	MyLayout.reset();
 	ClockWidget.setTimerMS(MyApp::get().getTimerMenu()->getTimerMS());
 	ClockWidget.startTimer();
+	MyApp::get().setUVLEDControl(true);
 	ClockWidget.showMS(true);
 	StartButton.hide();
-	MyLayout.reset();
 
 	return ErrorType();
 }
@@ -79,23 +80,23 @@ libesp::BaseMenu::ReturnStateContext RunningTimer::onRun() {
 		delete pe;
 		widgetHit = MyLayout.pick(TouchPosInBuf);
 	}
-	if(widgetHit) {
+	if(widgetHit && penUp) {
 		ESP_LOGI(LOGTAG, "Widget %s hit\n", widgetHit->getName());
 		switch(widgetHit->getWidgetID()) {
 		case 1:
 			StartButton.hide();
 			StopButton.unHide();
-			ClockWidget.startTimer();
+			ClockWidget.unPause();
+			MyApp::get().setUVLEDControl(true);
 			break;
 		case 2:
 			StartButton.unHide();
 			StopButton.hide();
-			ClockWidget.stopTimer();
+			ClockWidget.pause();
+			MyApp::get().setUVLEDControl(false);
 			break;
 		case 1000:
-			if(penUp) {
-				nextState = MyApp::get().getMenuState();
-			}
+			nextState = MyApp::get().getMenuState();
 			break;
 		default:
 			break;
@@ -104,6 +105,7 @@ libesp::BaseMenu::ReturnStateContext RunningTimer::onRun() {
 	if(ClockWidget.isDone()) {
 		StartButton.unHide();
 		StopButton.hide();
+		MyApp::get().setUVLEDControl(false);
 	}
 
 	MyLayout.draw(&MyApp::get().getDisplay());
