@@ -1,3 +1,6 @@
 [submodule "firmware/lightbox/components/libesp"]
 	path = firmware/lightbox/components/libesp
 	url = https://github.com/cmdc0de/libesp
+[submodule "firmware/lightbox/components/esp-etl/etl"]
+	path = firmware/lightbox/components/esp-etl/etl
+	url = https://github.com/cmdc0de/etl
