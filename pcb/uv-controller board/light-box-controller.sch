@@ -4157,24 +4157,6 @@ chip</description>
 <text x="-1.397" y="1.143" size="1.27" layer="25">&gt;NAME</text>
 <text x="-1.397" y="-2.413" size="1.27" layer="27">&gt;VALUE</text>
 </package>
-<package name="SOD-123FL">
-<smd name="A" x="-1.6" y="0" dx="0.95" dy="1.05" layer="1"/>
-<smd name="C" x="1.5" y="0" dx="0.95" dy="1.05" layer="1"/>
-<text x="-1.278" y="1.143" size="0.889" layer="25" ratio="15">&gt;NAME</text>
-<text x="-1.186" y="-1.505" size="0.4064" layer="27" ratio="10">&gt;VALUE</text>
-<wire x1="-1.3" y1="0.8" x2="0.5" y2="0.8" width="0.127" layer="21"/>
-<wire x1="0.5" y1="0.8" x2="0.6" y2="0.8" width="0.127" layer="21"/>
-<wire x1="0.6" y1="0.8" x2="1.2" y2="0.8" width="0.127" layer="21"/>
-<wire x1="-1.3" y1="-0.8" x2="0.6" y2="-0.8" width="0.127" layer="21"/>
-<wire x1="0.6" y1="-0.8" x2="1.2" y2="-0.8" width="0.127" layer="21"/>
-<wire x1="0.6" y1="0.8" x2="0.6" y2="-0.8" width="0.127" layer="21"/>
-<wire x1="0.6" y1="-0.8" x2="0.5" y2="-0.8" width="0.127" layer="21"/>
-<wire x1="0.5" y1="-0.8" x2="0.5" y2="0.8" width="0.127" layer="21"/>
-<wire x1="-1.3" y1="0.8" x2="1.2" y2="0.8" width="0.127" layer="51"/>
-<wire x1="1.2" y1="0.8" x2="1.2" y2="-0.8" width="0.127" layer="51"/>
-<wire x1="1.2" y1="-0.8" x2="-1.3" y2="-0.8" width="0.127" layer="51"/>
-<wire x1="-1.3" y1="-0.8" x2="-1.3" y2="0.8" width="0.127" layer="51"/>
-</package>
 <package name="DO-214AA">
 <wire x1="-2.3" y1="1.2" x2="-2.3" y2="1.55" width="0.127" layer="21"/>
 <wire x1="-2.3" y1="1.55" x2="2.3" y2="1.55" width="0.127" layer="21"/>
@@ -4208,6 +4190,47 @@ chip</description>
 <wire x1="2.6" y1="0" x2="3.9" y2="0" width="0.1524" layer="21"/>
 <pad name="A" x="5.3" y="0" drill="1.1" diameter="1.65" rot="R180"/>
 <pad name="C" x="-5.3" y="0" drill="1.1" diameter="1.65" shape="square" rot="R180"/>
+</package>
+<package name="SOD-123FL">
+<smd name="A" x="-1.35" y="0" dx="1.1" dy="1.1" layer="1"/>
+<smd name="C" x="1.35" y="0" dx="1.1" dy="1.1" layer="1"/>
+<text x="-1.278" y="1.143" size="0.4064" layer="25" ratio="15">&gt;NAME</text>
+<text x="-1.186" y="-1.505" size="0.4064" layer="27" ratio="10">&gt;VALUE</text>
+<wire x1="-1.3" y1="0.8" x2="0.5" y2="0.8" width="0.127" layer="21"/>
+<wire x1="0.5" y1="0.8" x2="0.6" y2="0.8" width="0.127" layer="21"/>
+<wire x1="0.6" y1="0.8" x2="1.2" y2="0.8" width="0.127" layer="21"/>
+<wire x1="-1.3" y1="-0.8" x2="0.6" y2="-0.8" width="0.127" layer="21"/>
+<wire x1="0.6" y1="-0.8" x2="1.2" y2="-0.8" width="0.127" layer="21"/>
+<wire x1="0.6" y1="0.8" x2="0.6" y2="-0.8" width="0.127" layer="21"/>
+<wire x1="0.6" y1="-0.8" x2="0.5" y2="-0.8" width="0.127" layer="21"/>
+<wire x1="0.5" y1="-0.8" x2="0.5" y2="0.8" width="0.127" layer="21"/>
+<wire x1="-1.3" y1="0.8" x2="1.2" y2="0.8" width="0.127" layer="51"/>
+<wire x1="1.2" y1="0.8" x2="1.2" y2="-0.8" width="0.127" layer="51"/>
+<wire x1="1.2" y1="-0.8" x2="-1.3" y2="-0.8" width="0.127" layer="51"/>
+<wire x1="-1.3" y1="-0.8" x2="-1.3" y2="0.8" width="0.127" layer="51"/>
+</package>
+<package name="CDPH4D19FNP3R3MC">
+<description>&lt;b&gt;CDPH4D19FNP-3R3MC-2&lt;/b&gt;&lt;br&gt;
+</description>
+<smd name="1" x="-2.8" y="0" dx="2.1" dy="1.8" layer="1"/>
+<smd name="2" x="2.8" y="0" dx="2.1" dy="1.8" layer="1"/>
+<text x="-0.725" y="0" size="1.27" layer="25" align="center">&gt;NAME</text>
+<text x="-0.725" y="0" size="1.27" layer="27" align="center">&gt;VALUE</text>
+<wire x1="-6.3" y1="3.45" x2="4.85" y2="3.45" width="0.1" layer="51"/>
+<wire x1="4.85" y1="3.45" x2="4.85" y2="-3.45" width="0.1" layer="51"/>
+<wire x1="4.85" y1="-3.45" x2="-6.3" y2="-3.45" width="0.1" layer="51"/>
+<wire x1="-6.3" y1="-3.45" x2="-6.3" y2="3.45" width="0.1" layer="51"/>
+<wire x1="-2.45" y1="0" x2="0" y2="2.45" width="0.2" layer="51"/>
+<wire x1="0" y1="2.45" x2="2.45" y2="0" width="0.2" layer="51"/>
+<wire x1="2.45" y1="0" x2="0" y2="-2.45" width="0.2" layer="51"/>
+<wire x1="0" y1="-2.45" x2="0" y2="-2.45" width="0.2" layer="51"/>
+<wire x1="0" y1="-2.45" x2="-2.45" y2="0" width="0.2" layer="51"/>
+<wire x1="-5.3" y1="0" x2="-5.3" y2="0" width="0.2" layer="21"/>
+<wire x1="-5.3" y1="0" x2="-5.2" y2="0" width="0.2" layer="21" curve="180"/>
+<wire x1="-5.2" y1="0" x2="-5.2" y2="0" width="0.2" layer="21"/>
+<wire x1="-5.2" y1="0" x2="-5.3" y2="0" width="0.2" layer="21" curve="180"/>
+<wire x1="-5.3" y1="0" x2="-5.3" y2="0" width="0.2" layer="21"/>
+<wire x1="-5.3" y1="0" x2="-5.2" y2="0" width="0.2" layer="21" curve="180"/>
 </package>
 </packages>
 <packages3d>
@@ -4300,6 +4323,16 @@ chip</description>
 <pin name="C" x="0" y="0" visible="off" length="point" direction="pas" rot="R180"/>
 <wire x1="-5.08" y1="0" x2="-3.81" y2="0" width="0.1524" layer="94"/>
 <wire x1="0" y1="0" x2="-1.27" y2="0" width="0.1524" layer="94"/>
+</symbol>
+<symbol name="CDPH4D19FNP-3R3MC">
+<wire x1="5.08" y1="0" x2="7.62" y2="0" width="0.254" layer="94" curve="-175.4"/>
+<wire x1="7.62" y1="0" x2="10.16" y2="0" width="0.254" layer="94" curve="-175.4"/>
+<wire x1="10.16" y1="0" x2="12.7" y2="0" width="0.254" layer="94" curve="-175.4"/>
+<wire x1="12.7" y1="0" x2="15.24" y2="0" width="0.254" layer="94" curve="-175.4"/>
+<text x="16.51" y="6.35" size="1.778" layer="95" align="center-left">&gt;NAME</text>
+<text x="16.51" y="3.81" size="1.778" layer="96" align="center-left">&gt;VALUE</text>
+<pin name="1" x="0" y="0" visible="pad" length="middle"/>
+<pin name="2" x="20.32" y="0" visible="pad" length="middle" rot="R180"/>
 </symbol>
 </symbols>
 <devicesets>
@@ -5191,6 +5224,40 @@ Basic schematic elements and footprints for 0603, 1206, and PTH resistors.</desc
 </connects>
 <technologies>
 <technology name=""/>
+</technologies>
+</device>
+<device name="" package="SOD-123FL">
+<connects>
+<connect gate="G$1" pin="A" pad="A"/>
+<connect gate="G$1" pin="C" pad="C"/>
+</connects>
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="CDPH4D19FNP-3R3MC" prefix="L">
+<description>&lt;b&gt;Fixed Inductors 3.3uH 1.5A 26ohms&lt;/b&gt;&lt;p&gt;
+Source: &lt;a href="https://componentsearchengine.com/Datasheets/1/CDPH4D19FNP-3R3MC.pdf"&gt; Datasheet &lt;/a&gt;</description>
+<gates>
+<gate name="G$1" symbol="CDPH4D19FNP-3R3MC" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="CDPH4D19FNP3R3MC">
+<connects>
+<connect gate="G$1" pin="1" pad="1"/>
+<connect gate="G$1" pin="2" pad="2"/>
+</connects>
+<technologies>
+<technology name="">
+<attribute name="DESCRIPTION" value="Fixed Inductors 3.3uH 1.5A 26ohms" constant="no"/>
+<attribute name="HEIGHT" value="2mm" constant="no"/>
+<attribute name="MANUFACTURER_NAME" value="Sumida" constant="no"/>
+<attribute name="MANUFACTURER_PART_NUMBER" value="CDPH4D19FNP-3R3MC" constant="no"/>
+<attribute name="MOUSER_PART_NUMBER" value="851-CDPH4D19FNP3R3MC" constant="no"/>
+<attribute name="MOUSER_PRICE-STOCK" value="https://www.mouser.com/Search/Refine.aspx?Keyword=851-CDPH4D19FNP3R3MC" constant="no"/>
+</technology>
 </technologies>
 </device>
 </devices>
@@ -6343,6 +6410,21 @@ Touch: YES&lt;br&gt;</description>
 <vertex x="-1.984375" y="-2.54"/>
 </polygon>
 </package>
+<package name="FIDUCIAL_1MM">
+<smd name="1" x="0" y="0" dx="1" dy="1" layer="1" roundness="100" stop="no" cream="no"/>
+<polygon width="0.127" layer="29">
+<vertex x="-1" y="0" curve="90"/>
+<vertex x="0" y="-1" curve="90"/>
+<vertex x="1" y="0" curve="90"/>
+<vertex x="0" y="1" curve="90"/>
+</polygon>
+<polygon width="0.127" layer="41">
+<vertex x="-1" y="0" curve="90"/>
+<vertex x="0" y="-1" curve="90"/>
+<vertex x="1" y="0" curve="90"/>
+<vertex x="0" y="1" curve="90"/>
+</polygon>
+</package>
 </packages>
 <symbols>
 <symbol name="CMD_C0DE_LOGO">
@@ -6565,6 +6647,9 @@ Touch: YES&lt;br&gt;</description>
 <vertex x="-1.984375" y="-2.54"/>
 </polygon>
 </symbol>
+<symbol name="DOT">
+<circle x="0" y="0" radius="2.54" width="0.254" layer="94"/>
+</symbol>
 </symbols>
 <devicesets>
 <deviceset name="CMD_C0DE_LOGO">
@@ -6585,6 +6670,103 @@ Touch: YES&lt;br&gt;</description>
 <device name="CMD_CODE_LOGO_SILK" package="CMD_C0DE_LOGO_SILK">
 <technologies>
 <technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+<deviceset name="FIDUCIAL">
+<description>For use by pick and place machines to calibrate the vision/machine, 1mm
+&lt;p&gt;By microbuilder.eu&lt;/p&gt;</description>
+<gates>
+<gate name="G$1" symbol="DOT" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="FIDUCIAL_1MM">
+<technologies>
+<technology name=""/>
+</technologies>
+</device>
+</devices>
+</deviceset>
+</devicesets>
+</library>
+<library name="dc-converters">
+<packages>
+<package name="SOP65P490X110-8N">
+<description>&lt;b&gt;DGK  (S-PDSO-G8)&lt;/b&gt;&lt;br&gt;
+</description>
+<smd name="1" x="-2.2" y="0.975" dx="1.4" dy="0.45" layer="1"/>
+<smd name="2" x="-2.2" y="0.325" dx="1.4" dy="0.45" layer="1"/>
+<smd name="3" x="-2.2" y="-0.325" dx="1.4" dy="0.45" layer="1"/>
+<smd name="4" x="-2.2" y="-0.975" dx="1.4" dy="0.45" layer="1"/>
+<smd name="5" x="2.2" y="-0.975" dx="1.4" dy="0.45" layer="1"/>
+<smd name="6" x="2.2" y="-0.325" dx="1.4" dy="0.45" layer="1"/>
+<smd name="7" x="2.2" y="0.325" dx="1.4" dy="0.45" layer="1"/>
+<smd name="8" x="2.2" y="0.975" dx="1.4" dy="0.45" layer="1"/>
+<text x="0" y="0" size="1.27" layer="25" align="center">&gt;NAME</text>
+<text x="0" y="0" size="1.27" layer="27" align="center">&gt;VALUE</text>
+<wire x1="-3.15" y1="1.8" x2="3.15" y2="1.8" width="0.05" layer="51"/>
+<wire x1="3.15" y1="1.8" x2="3.15" y2="-1.8" width="0.05" layer="51"/>
+<wire x1="3.15" y1="-1.8" x2="-3.15" y2="-1.8" width="0.05" layer="51"/>
+<wire x1="-3.15" y1="-1.8" x2="-3.15" y2="1.8" width="0.05" layer="51"/>
+<wire x1="-1.5" y1="1.5" x2="1.5" y2="1.5" width="0.1" layer="51"/>
+<wire x1="1.5" y1="1.5" x2="1.5" y2="-1.5" width="0.1" layer="51"/>
+<wire x1="1.5" y1="-1.5" x2="-1.5" y2="-1.5" width="0.1" layer="51"/>
+<wire x1="-1.5" y1="-1.5" x2="-1.5" y2="1.5" width="0.1" layer="51"/>
+<wire x1="-1.5" y1="0.85" x2="-0.85" y2="1.5" width="0.1" layer="51"/>
+<wire x1="-1.15" y1="1.5" x2="1.15" y2="1.5" width="0.2" layer="21"/>
+<wire x1="1.15" y1="1.5" x2="1.15" y2="-1.5" width="0.2" layer="21"/>
+<wire x1="1.15" y1="-1.5" x2="-1.15" y2="-1.5" width="0.2" layer="21"/>
+<wire x1="-1.15" y1="-1.5" x2="-1.15" y2="1.5" width="0.2" layer="21"/>
+<wire x1="-2.9" y1="1.55" x2="-1.5" y2="1.55" width="0.2" layer="21"/>
+</package>
+</packages>
+<symbols>
+<symbol name="TPS61085DGKR">
+<wire x1="5.08" y1="2.54" x2="22.86" y2="2.54" width="0.254" layer="94"/>
+<wire x1="22.86" y1="-10.16" x2="22.86" y2="2.54" width="0.254" layer="94"/>
+<wire x1="22.86" y1="-10.16" x2="5.08" y2="-10.16" width="0.254" layer="94"/>
+<wire x1="5.08" y1="2.54" x2="5.08" y2="-10.16" width="0.254" layer="94"/>
+<text x="24.13" y="7.62" size="1.778" layer="95" align="center-left">&gt;NAME</text>
+<text x="24.13" y="5.08" size="1.778" layer="96" align="center-left">&gt;VALUE</text>
+<pin name="COMP" x="0" y="0" length="middle"/>
+<pin name="FB" x="0" y="-2.54" length="middle"/>
+<pin name="EN" x="0" y="-5.08" length="middle"/>
+<pin name="PGND" x="0" y="-7.62" length="middle"/>
+<pin name="SS" x="27.94" y="0" length="middle" rot="R180"/>
+<pin name="FREQ" x="27.94" y="-2.54" length="middle" rot="R180"/>
+<pin name="IN" x="27.94" y="-5.08" length="middle" rot="R180"/>
+<pin name="SW" x="27.94" y="-7.62" length="middle" rot="R180"/>
+</symbol>
+</symbols>
+<devicesets>
+<deviceset name="TPS61085DGKR" prefix="IC">
+<description>&lt;b&gt;18.5V, 2A, 650kHz / 1.2MHz Step-Up DC-DC Converter w/ Forced PWM Mode&lt;/b&gt;&lt;p&gt;
+Source: &lt;a href="http://www.ti.com/general/docs/suppproductinfo.tsp?distId=10&amp;gotoUrl=http://www.ti.com/lit/gpn/tps61085"&gt; Datasheet &lt;/a&gt;</description>
+<gates>
+<gate name="G$1" symbol="TPS61085DGKR" x="0" y="0"/>
+</gates>
+<devices>
+<device name="" package="SOP65P490X110-8N">
+<connects>
+<connect gate="G$1" pin="COMP" pad="1"/>
+<connect gate="G$1" pin="EN" pad="3"/>
+<connect gate="G$1" pin="FB" pad="2"/>
+<connect gate="G$1" pin="FREQ" pad="7"/>
+<connect gate="G$1" pin="IN" pad="6"/>
+<connect gate="G$1" pin="PGND" pad="4"/>
+<connect gate="G$1" pin="SS" pad="8"/>
+<connect gate="G$1" pin="SW" pad="5"/>
+</connects>
+<technologies>
+<technology name="">
+<attribute name="DESCRIPTION" value="18.5V, 2A, 650kHz / 1.2MHz Step-Up DC-DC Converter w/ Forced PWM Mode" constant="no"/>
+<attribute name="HEIGHT" value="1.1mm" constant="no"/>
+<attribute name="MANUFACTURER_NAME" value="Texas Instruments" constant="no"/>
+<attribute name="MANUFACTURER_PART_NUMBER" value="TPS61085DGKR" constant="no"/>
+<attribute name="MOUSER_PART_NUMBER" value="595-TPS61085DGKR" constant="no"/>
+<attribute name="MOUSER_PRICE-STOCK" value="https://www.mouser.co.uk/ProductDetail/Texas-Instruments/TPS61085DGKR?qs=59Rn2Bt6jP0PB7IUu7UPlw%3D%3D" constant="no"/>
+</technology>
 </technologies>
 </device>
 </devices>
@@ -6634,6 +6816,19 @@ Touch: YES&lt;br&gt;</description>
 <part name="J3" library="connector" deviceset="M09" device="LONGPADS"/>
 <part name="R5" library="passives" deviceset="RESISTOR" device="0805-RES" value="10 K"/>
 <part name="U$4" library="logos" deviceset="CMD_C0DE_LOGO" device="CMD_CODE_LOGO_SILK"/>
+<part name="IC2" library="dc-converters" deviceset="TPS61085DGKR" device=""/>
+<part name="R6" library="passives" deviceset="RESISTOR" device="0805-RES" value="47 K"/>
+<part name="C14" library="passives" deviceset="C-US" device="C0805K" package3d_urn="urn:adsk.eagle:package:8089589/1" value="1.6 nF"/>
+<part name="C15" library="passives" deviceset="C-US" device="C0805K" package3d_urn="urn:adsk.eagle:package:8089589/1" value="1 uF"/>
+<part name="D2" library="passives" deviceset="DIODE-SCHOTTKY" device="SOD-123FL"/>
+<part name="R7" library="passives" deviceset="RESISTOR" device="0805-RES" value="158  K"/>
+<part name="R8" library="passives" deviceset="RESISTOR" device="0805-RES" value="18.2 K"/>
+<part name="C16" library="passives" deviceset="C-US" device="C0805K" package3d_urn="urn:adsk.eagle:package:8089589/1" value="10 uF"/>
+<part name="C17" library="passives" deviceset="C-US" device="C0805K" package3d_urn="urn:adsk.eagle:package:8089589/1" value="10 uF"/>
+<part name="C18" library="passives" deviceset="C-US" device="C0805K" package3d_urn="urn:adsk.eagle:package:8089589/1" value="0.1 uF"/>
+<part name="L1" library="passives" deviceset="CDPH4D19FNP-3R3MC" device=""/>
+<part name="U$5" library="logos" deviceset="FIDUCIAL" device=""/>
+<part name="U$6" library="logos" deviceset="FIDUCIAL" device=""/>
 </parts>
 <sheets>
 <sheet>
@@ -6931,6 +7126,52 @@ from power source to circuit (load) through MOSFET to source to ground.</text>
 <attribute name="VALUE" x="-12.7" y="40.64" size="1.778" layer="96"/>
 <attribute name="NAME" x="-12.7" y="72.39" size="1.778" layer="95"/>
 </instance>
+<instance part="IC2" gate="G$1" x="60.96" y="-45.72" smashed="yes">
+<attribute name="NAME" x="72.39" y="-40.64" size="1.778" layer="95" align="center-left"/>
+<attribute name="VALUE" x="67.31" y="-58.42" size="1.778" layer="96" align="center-left"/>
+</instance>
+<instance part="R6" gate="G$1" x="33.02" y="-45.72" smashed="yes">
+<attribute name="NAME" x="29.21" y="-44.2214" size="1.778" layer="95"/>
+<attribute name="VALUE" x="29.21" y="-49.022" size="1.778" layer="96"/>
+</instance>
+<instance part="C14" gate="G$1" x="20.32" y="-48.26" smashed="yes">
+<attribute name="NAME" x="13.716" y="-47.625" size="1.778" layer="95"/>
+<attribute name="VALUE" x="16.256" y="-52.451" size="1.778" layer="96"/>
+</instance>
+<instance part="C15" gate="G$1" x="93.98" y="-53.34" smashed="yes">
+<attribute name="NAME" x="87.376" y="-52.705" size="1.778" layer="95"/>
+<attribute name="VALUE" x="89.916" y="-57.531" size="1.778" layer="96"/>
+</instance>
+<instance part="D2" gate="G$1" x="119.38" y="-71.12" smashed="yes">
+<attribute name="NAME" x="114.3" y="-68.0974" size="1.778" layer="95"/>
+<attribute name="VALUE" x="93.98" y="-78.5114" size="1.778" layer="96"/>
+</instance>
+<instance part="R7" gate="G$1" x="132.08" y="-76.2" smashed="yes" rot="R270">
+<attribute name="NAME" x="133.5786" y="-72.39" size="1.778" layer="95" rot="R270"/>
+<attribute name="VALUE" x="128.778" y="-72.39" size="1.778" layer="96" rot="R270"/>
+</instance>
+<instance part="R8" gate="G$1" x="132.08" y="-91.44" smashed="yes" rot="R270">
+<attribute name="NAME" x="133.5786" y="-87.63" size="1.778" layer="95" rot="R270"/>
+<attribute name="VALUE" x="128.778" y="-87.63" size="1.778" layer="96" rot="R270"/>
+</instance>
+<instance part="C16" gate="G$1" x="144.78" y="-73.66" smashed="yes">
+<attribute name="NAME" x="138.176" y="-73.025" size="1.778" layer="95"/>
+<attribute name="VALUE" x="140.716" y="-77.851" size="1.778" layer="96"/>
+</instance>
+<instance part="C17" gate="G$1" x="152.4" y="-73.66" smashed="yes">
+<attribute name="NAME" x="145.796" y="-73.025" size="1.778" layer="95"/>
+<attribute name="VALUE" x="148.336" y="-77.851" size="1.778" layer="96"/>
+</instance>
+<instance part="C18" gate="G$1" x="109.22" y="-43.18" smashed="yes" rot="R180">
+<attribute name="NAME" x="108.204" y="-43.815" size="1.778" layer="95" rot="R180"/>
+<attribute name="VALUE" x="108.204" y="-38.989" size="1.778" layer="96" rot="R180"/>
+</instance>
+<instance part="L1" gate="G$1" x="109.22" y="-71.12" smashed="yes" rot="R90">
+<attribute name="NAME" x="105.41" y="-64.77" size="1.778" layer="95" rot="R90" align="center-left"/>
+<attribute name="VALUE" x="110.49" y="-59.69" size="1.778" layer="96" align="center-left"/>
+</instance>
+<instance part="U$5" gate="G$1" x="-20.32" y="-33.02" smashed="yes"/>
+<instance part="U$6" gate="G$1" x="-17.78" y="-50.8" smashed="yes"/>
 </instances>
 <busses>
 </busses>
@@ -6982,6 +7223,22 @@ from power source to circuit (load) through MOSFET to source to ground.</text>
 <pinref part="J3" gate="G$1" pin="9"/>
 <wire x1="-2.54" y1="66.04" x2="0" y2="66.04" width="0.1524" layer="91"/>
 <label x="0" y="66.04" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="IC2" gate="G$1" pin="IN"/>
+<wire x1="88.9" y1="-50.8" x2="93.98" y2="-50.8" width="0.1524" layer="91"/>
+<label x="129.54" y="-50.8" size="1.778" layer="95"/>
+<pinref part="L1" gate="G$1" pin="2"/>
+<pinref part="C15" gate="G$1" pin="1"/>
+<wire x1="93.98" y1="-50.8" x2="109.22" y2="-50.8" width="0.1524" layer="91"/>
+<junction x="93.98" y="-50.8"/>
+<wire x1="109.22" y1="-50.8" x2="127" y2="-50.8" width="0.1524" layer="91"/>
+<junction x="109.22" y="-50.8"/>
+</segment>
+<segment>
+<pinref part="IC2" gate="G$1" pin="FREQ"/>
+<wire x1="88.9" y1="-48.26" x2="91.44" y2="-48.26" width="0.1524" layer="91"/>
+<label x="91.44" y="-48.26" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="GND" class="0">
@@ -7052,6 +7309,39 @@ from power source to circuit (load) through MOSFET to source to ground.</text>
 <wire x1="48.26" y1="-10.16" x2="58.42" y2="-10.16" width="0.1524" layer="91"/>
 <wire x1="58.42" y1="-10.16" x2="58.42" y2="-7.62" width="0.1524" layer="91"/>
 <label x="53.34" y="-12.7" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="IC2" gate="G$1" pin="PGND"/>
+<wire x1="60.96" y1="-53.34" x2="58.42" y2="-53.34" width="0.1524" layer="91"/>
+<label x="55.88" y="-53.34" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="C14" gate="G$1" pin="2"/>
+<wire x1="20.32" y1="-53.34" x2="20.32" y2="-55.88" width="0.1524" layer="91"/>
+<label x="20.32" y="-60.96" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="C15" gate="G$1" pin="2"/>
+<wire x1="93.98" y1="-58.42" x2="93.98" y2="-60.96" width="0.1524" layer="91"/>
+<label x="93.98" y="-63.5" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="R8" gate="G$1" pin="2"/>
+<wire x1="132.08" y1="-96.52" x2="132.08" y2="-99.06" width="0.1524" layer="91"/>
+<label x="132.08" y="-101.6" size="1.778" layer="95"/>
+<pinref part="C16" gate="G$1" pin="2"/>
+<wire x1="144.78" y1="-78.74" x2="144.78" y2="-96.52" width="0.1524" layer="91"/>
+<pinref part="C17" gate="G$1" pin="2"/>
+<wire x1="144.78" y1="-96.52" x2="152.4" y2="-96.52" width="0.1524" layer="91"/>
+<wire x1="152.4" y1="-96.52" x2="152.4" y2="-78.74" width="0.1524" layer="91"/>
+<wire x1="132.08" y1="-96.52" x2="144.78" y2="-96.52" width="0.1524" layer="91"/>
+<junction x="132.08" y="-96.52"/>
+<junction x="144.78" y="-96.52"/>
+</segment>
+<segment>
+<pinref part="C18" gate="G$1" pin="2"/>
+<wire x1="109.22" y1="-38.1" x2="109.22" y2="-35.56" width="0.1524" layer="91"/>
+<label x="109.22" y="-35.56" size="1.778" layer="95"/>
 </segment>
 </net>
 <net name="ESP_EN" class="0">
@@ -7413,11 +7703,78 @@ from power source to circuit (load) through MOSFET to source to ground.</text>
 <label x="43.18" y="60.96" size="1.778" layer="95"/>
 </segment>
 </net>
+<net name="N$3" class="0">
+<segment>
+<pinref part="IC2" gate="G$1" pin="COMP"/>
+<wire x1="60.96" y1="-45.72" x2="38.1" y2="-45.72" width="0.1524" layer="91"/>
+<pinref part="R6" gate="G$1" pin="2"/>
+</segment>
+</net>
+<net name="N$5" class="0">
+<segment>
+<pinref part="R6" gate="G$1" pin="1"/>
+<pinref part="C14" gate="G$1" pin="1"/>
+<wire x1="27.94" y1="-45.72" x2="20.32" y2="-45.72" width="0.1524" layer="91"/>
+</segment>
+</net>
+<net name="FB" class="0">
+<segment>
+<pinref part="IC2" gate="G$1" pin="FB"/>
+<wire x1="60.96" y1="-48.26" x2="35.56" y2="-48.26" width="0.1524" layer="91"/>
+<wire x1="35.56" y1="-48.26" x2="35.56" y2="-83.82" width="0.1524" layer="91"/>
+<label x="91.44" y="-86.36" size="1.778" layer="95"/>
+<pinref part="R8" gate="G$1" pin="1"/>
+<pinref part="R7" gate="G$1" pin="2"/>
+<wire x1="132.08" y1="-86.36" x2="132.08" y2="-83.82" width="0.1524" layer="91"/>
+<wire x1="132.08" y1="-83.82" x2="132.08" y2="-81.28" width="0.1524" layer="91"/>
+<wire x1="35.56" y1="-83.82" x2="132.08" y2="-83.82" width="0.1524" layer="91"/>
+<junction x="132.08" y="-83.82"/>
+</segment>
+</net>
+<net name="UVLED_BEFORE_DIODE" class="0">
+<segment>
+<pinref part="IC2" gate="G$1" pin="SW"/>
+<wire x1="88.9" y1="-53.34" x2="88.9" y2="-71.12" width="0.1524" layer="91"/>
+<pinref part="L1" gate="G$1" pin="1"/>
+<wire x1="88.9" y1="-71.12" x2="109.22" y2="-71.12" width="0.1524" layer="91"/>
+<pinref part="D2" gate="G$1" pin="A"/>
+<wire x1="109.22" y1="-71.12" x2="114.3" y2="-71.12" width="0.1524" layer="91"/>
+<junction x="109.22" y="-71.12"/>
+</segment>
+</net>
 <net name="UVLED_CONTROL" class="0">
+<segment>
+<pinref part="R7" gate="G$1" pin="1"/>
+<wire x1="132.08" y1="-71.12" x2="144.78" y2="-71.12" width="0.1524" layer="91"/>
+<label x="160.02" y="-71.12" size="1.778" layer="95"/>
+<pinref part="C16" gate="G$1" pin="1"/>
+<wire x1="144.78" y1="-71.12" x2="152.4" y2="-71.12" width="0.1524" layer="91"/>
+<junction x="144.78" y="-71.12"/>
+<pinref part="C17" gate="G$1" pin="1"/>
+<wire x1="152.4" y1="-71.12" x2="157.48" y2="-71.12" width="0.1524" layer="91"/>
+<junction x="152.4" y="-71.12"/>
+<pinref part="D2" gate="G$1" pin="C"/>
+<wire x1="119.38" y1="-71.12" x2="132.08" y2="-71.12" width="0.1524" layer="91"/>
+<junction x="132.08" y="-71.12"/>
+</segment>
+</net>
+<net name="UVLED_CONTROL_EN" class="0">
 <segment>
 <pinref part="U2" gate="G$1" pin="IO12"/>
 <wire x1="48.26" y1="35.56" x2="45.72" y2="35.56" width="0.1524" layer="91"/>
-<label x="27.94" y="35.56" size="1.778" layer="95"/>
+<label x="22.86" y="35.56" size="1.778" layer="95"/>
+</segment>
+<segment>
+<pinref part="IC2" gate="G$1" pin="EN"/>
+<wire x1="60.96" y1="-50.8" x2="58.42" y2="-50.8" width="0.1524" layer="91"/>
+<label x="38.1" y="-50.8" size="1.778" layer="95"/>
+</segment>
+</net>
+<net name="N$8" class="0">
+<segment>
+<pinref part="IC2" gate="G$1" pin="SS"/>
+<wire x1="88.9" y1="-45.72" x2="109.22" y2="-45.72" width="0.1524" layer="91"/>
+<pinref part="C18" gate="G$1" pin="1"/>
 </segment>
 </net>
 </nets>
@@ -7426,6 +7783,7 @@ from power source to circuit (load) through MOSFET to source to ground.</text>
 <errors>
 <approved hash="104,2,162.306,72.39,U$2,VCC,V3.3,,,"/>
 <approved hash="104,2,20.32,99.06,U$3,VCC,N$1,,,"/>
+<approved hash="113,2,-5.75733,58.9636,J3,,,,,"/>
 </errors>
 </schematic>
 </drawing>
